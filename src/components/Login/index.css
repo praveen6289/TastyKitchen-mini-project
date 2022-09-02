@@ -1,0 +1,146 @@
+.login-bg-container {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+}
+@media screen and (min-width: 768px) {
+  .login-bg-container {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+.banner-sm-image {
+  height: 290px;
+  width: 290px;
+  align-self: flex-end;
+}
+@media screen and (min-width: 768px) {
+  .banner-sm-image {
+    display: none;
+  }
+}
+.login-heading {
+  padding-left: 24px;
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  color: #0f172a;
+  margin-top: 0px;
+}
+@media screen and (min-width: 768px) {
+  .login-heading {
+    text-align: center;
+    font-size: 32px;
+  }
+}
+.login-form {
+  padding-left: 24px;
+  padding-right: 24px;
+  display: flex;
+  flex-direction: column;
+}
+.label {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 12px;
+  color: #475569;
+  width: 66px;
+  height: 16px;
+  margin-bottom: 10px;
+}
+
+.user-input {
+  height: 40px;
+  background: #e2e8f0;
+  border-radius: 2px;
+  border: none;
+  margin-bottom: 15px;
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  color: #171f46;
+  padding-left: 16px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.error-msg {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  color: #ef4444;
+  margin-top: 0px;
+  margin-bottom: 20px;
+}
+.login-button {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  background: #f7931e;
+  border-radius: 8px;
+  border: none;
+  color: #ffffff;
+  height: 40px;
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-top: 8px;
+  text-align: center;
+  cursor: pointer;
+}
+
+@media screen and (min-width: 768px) {
+  .login-container {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    width: 556px;
+    height: 561px;
+    margin-left: 165px;
+    margin-top: 231px;
+    margin-bottom: 251px;
+    background: #fefeff;
+    box-shadow: 0px 8px 40px rgba(7, 7, 7, 0.08);
+    border-radius: 8px;
+    padding: 50px;
+  }
+}
+.desktop-view-banner-img {
+  display: none;
+}
+@media screen and (min-width: 768px) {
+  .desktop-view-banner-img {
+    display: block;
+    width: 705px;
+  }
+}
+
+.logo {
+  display: none;
+}
+.logo-heading {
+  display: none;
+}
+@media screen and (min-width: 768px) {
+  .logo {
+    display: block;
+    width: 49px;
+    height: 39px;
+    align-self: center;
+  }
+  .logo-heading {
+    display: block;
+    align-self: center;
+    font-family: 'DM Sans';
+    font-style: italic;
+    font-weight: 700;
+    font-size: 24px;
+    color: #f7931e;
+    margin-top: 0px;
+  }
+}
