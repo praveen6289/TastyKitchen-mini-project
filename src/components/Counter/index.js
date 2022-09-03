@@ -12,23 +12,23 @@ class Counter extends Component {
   state = {currentPage: Page}
 
   onIncrement = () => {
-    const {pageChangeFunction} = this.props
+    const {pageCount} = this.props
     const {currentPage} = this.state
     if (currentPage < totalPages) {
       this.setState(
         pre => ({currentPage: pre.currentPage + 1}),
-        pageChangeFunction(currentPage + 1),
+        pageCount(currentPage + 1),
       )
     }
   }
 
   onDecrement = () => {
-    const {pageChangeFunction} = this.props
+    const {pageCount} = this.props
     const {currentPage} = this.state
     if (currentPage > 1) {
       this.setState(
         pre => ({currentPage: pre.currentPage - 1}),
-        pageChangeFunction(currentPage - 1),
+        pageCount(currentPage - 1),
       )
     }
   }

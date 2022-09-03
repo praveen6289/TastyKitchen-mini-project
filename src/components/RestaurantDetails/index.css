@@ -1,0 +1,51 @@
+.restaurant-Loader {
+  display: flex;
+  justify-content: center;
+  align-self: center;
+}
+.main-container {
+  min-height: 100vh;
+}
+
+.restaurant-container {
+  background-image: url('https://res.cloudinary.com/dazr9r8xm/image/upload/v1662233292/TastyKitchen/restaurant-banner-bg_jjbssg.png');
+  height: 45vh;
+  width: 100%;
+  background-size: cover;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  border: 2px solid red;
+  padding: 20px;
+}
+.restaurant-details-container {
+  display: flex;
+  border: 2px solid red;
+  flex-wrap: wrap;
+}
+.restaurant-img {
+  height: 221px;
+  width: 221px;
+  margin-right: 20px;
+}
+
+.details-container {
+  border: 2px solid red;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 240px;
+  flex-wrap: wrap;
+}
+
+.foods-list-container {
+  width: 90%;
+  max-width: 800px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  border: 2px solid red;
+  list-style-type: none;
+  padding: 0px;
+}

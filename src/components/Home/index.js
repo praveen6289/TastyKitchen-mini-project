@@ -53,6 +53,7 @@ class Home extends Component {
   }
 
   componentDidMount = () => {
+    window.scrollTo(0, 0)
     this.onGetCarouselDetails()
     this.onGetRestaurantsDetails()
   }
@@ -259,7 +260,7 @@ class Home extends Component {
         <div className="home-container">
           {this.renderCarouselData()}
           {this.renderAllPopularRestaurants()}
-          <Counter pageChangeFunction={this.getActivePage} />
+          <Counter pageCount={this.getActivePage} />
         </div>
 
         <Footer />
