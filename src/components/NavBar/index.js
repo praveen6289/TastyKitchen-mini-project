@@ -35,7 +35,7 @@ const NavBar = props => {
             </li>
 
             <li>
-              <Link to="/" className="nav-link">
+              <Link to="/cart" className="nav-link">
                 Cart
               </Link>
             </li>
@@ -64,7 +64,7 @@ const NavBar = props => {
               </li>
 
               <li>
-                <Link to="/" className="nav-link">
+                <Link to="/cart" className="nav-link">
                   Cart
                 </Link>
               </li>

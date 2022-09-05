@@ -1,12 +1,14 @@
 import {Component} from 'react'
 import Cookies from 'js-cookie'
+import {IoIosArrowBack, IoIosArrowForward} from 'react-icons/io'
+import {AiOutlineSearch} from 'react-icons/ai'
 import {BsFilterLeft} from 'react-icons/bs'
 import Loader from 'react-loader-spinner'
 import Slider from 'react-slick'
 import NavBar from '../NavBar'
 import Footer from '../Footer'
 import PopularRestaurantView from '../PopularRestaurantView'
-import Counter from '../Counter'
+
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 
@@ -39,8 +41,7 @@ const sortByOptions = [
   },
 ]
 
-const limit = 9
-
+const totalPages = 4
 class Home extends Component {
   state = {
     carouselApiStatus: carouselApiStatusConstants.initial,
@@ -53,7 +54,6 @@ class Home extends Component {
   }
 
   componentDidMount = () => {
-    window.scrollTo(0, 0)
     this.onGetCarouselDetails()
     this.onGetRestaurantsDetails()
   }
@@ -136,8 +136,8 @@ class Home extends Component {
     })
     const {selectedSortByValue, activePage, searchInput} = this.state
     const jwtToken = Cookies.get('jwt_token')
-    const offset = (activePage - 1) * limit
-    const allRestaurantsApiUrl = `https://apis.ccbp.in/restaurants-list?search=${searchInput}&offset=${offset}&limit=${limit}&sort_by_rating=${selectedSortByValue}`
+    const offset = (activePage - 1) * 9
+    const allRestaurantsApiUrl = `https://apis.ccbp.in/restaurants-list?search=${searchInput}&offset=${offset}&limit=9&sort_by_rating=${selectedSortByValue}`
     const optionsAllRestaurants = {
       headers: {
         Authorization: `Bearer ${jwtToken}`,
@@ -178,9 +178,44 @@ class Home extends Component {
       })
     } else {
       this.setState({
-        restaurantsApiStatus: allPopularRestaurantsApiStatus.inProgress,
+        restaurantsApiStatus: allPopularRestaurantsApiStatus.failure,
       })
     }
+  }
+
+  onChangeSortBy = event => {
+    this.setState(
+      {selectedSortByValue: event.target.value},
+      this.onGetRestaurantsDetails,
+    )
+  }
+
+  leftArrowClicked = () => {
+    const {activePage} = this.state
+    if (activePage > 1) {
+      this.setState(
+        prev => ({activePage: prev.activePage - 1}),
+        this.onGetRestaurantsDetails,
+      )
+    }
+  }
+
+  rightArrowClicked = () => {
+    const {activePage} = this.state
+    if (activePage < 4) {
+      this.setState(
+        prev => ({activePage: prev.activePage + 1}),
+        this.onGetRestaurantsDetails,
+      )
+    }
+  }
+
+  onSearchRestaurant = event => {
+    this.setState({searchInput: event.target.value})
+  }
+
+  onSubmitSearchInput = () => {
+    this.onGetRestaurantsDetails()
   }
 
   renderLoadingRestaurantsView = () => (
@@ -189,8 +224,28 @@ class Home extends Component {
     </div>
   )
 
+  renderRestaurantsFailureView = () => (
+    <div className="not-found-container">
+      <img
+        src="https://res.cloudinary.com/dazr9r8xm/image/upload/v1662131952/TastyKitchen/not-found_kpxxzu.png"
+        alt="not found"
+        className="not-found-img"
+      />
+      <div className="not-found-details-container">
+        <h1 className="not-found-heading">Page Not Found</h1>
+        <p className="not-found-description">
+          We are sorry, the page you requested could not be found. Please go
+          back to the homepage
+        </p>
+        <button type="button" className="home-button">
+          Home
+        </button>
+      </div>
+    </div>
+  )
+
   renderDisplayRestaurantsView = () => {
-    const {allRestaurantsData} = this.state
+    const {allRestaurantsData, selectedSortByValue, searchInput} = this.state
     return (
       <div className="home-details-container">
         <div className="home-filter-container">
@@ -202,21 +257,32 @@ class Home extends Component {
             </p>
           </div>
           <div className="search-input-container">
-            <label className="search-label" htmlFor="searchInput">
-              Search The Restaurant
-            </label>
             <input
               type="search"
               id="searchInput"
               className="search-element"
               onChange={this.onSearchRestaurant}
               placeholder="Search Restaurant Here.."
+              value={searchInput}
             />
+            <button
+              testid="searchButton"
+              type="button"
+              className="search-button"
+              onClick={this.onSubmitSearchInput}
+            >
+              <AiOutlineSearch className="search-icon" />
+            </button>
           </div>
           <div className="filter-container">
             <BsFilterLeft className="filter-logo" />
             <p className="sort-heading">Sort by</p>
-            <select id="sortBy" className="select-element">
+            <select
+              id="sortBy"
+              className="select-element"
+              value={selectedSortByValue}
+              onChange={this.onChangeSortBy}
+            >
               {sortByOptions.map(eachOption => (
                 <option key={eachOption.id}>{eachOption.displayText}</option>
               ))}
@@ -241,6 +307,8 @@ class Home extends Component {
     switch (restaurantsApiStatus) {
       case allPopularRestaurantsApiStatus.success:
         return this.renderDisplayRestaurantsView()
+      case allPopularRestaurantsApiStatus.failure:
+        return this.renderRestaurantsFailureView()
       case allPopularRestaurantsApiStatus.inProgress:
         return this.renderLoadingRestaurantsView()
       default:
@@ -248,19 +316,37 @@ class Home extends Component {
     }
   }
 
-  getActivePage = page => {
-    window.scrollTo(500, 500)
-    this.setState({activePage: page}, this.getAllRestaurantsData)
-  }
-
   render() {
+    const {activePage} = this.state
+    console.log(activePage)
     return (
       <div className="app-container">
         <NavBar />
         <div className="home-container">
           {this.renderCarouselData()}
           {this.renderAllPopularRestaurants()}
-          <Counter pageCount={this.getActivePage} />
+          <div className="pagination-counter-container">
+            <button
+              type="button"
+              onClick={this.leftArrowClicked}
+              className="btn"
+              testid="pagination-left-button"
+            >
+              <IoIosArrowBack className="pagination-icon" />
+            </button>
+            <div className="pages-class">
+              <span testid="active-page-number">{activePage}</span> of{' '}
+              {totalPages}
+            </div>
+            <button
+              type="button"
+              onClick={this.rightArrowClicked}
+              className="btn"
+              testid="pagination-right-button"
+            >
+              <IoIosArrowForward className="pagination-icon" />
+            </button>
+          </div>
         </div>
 
         <Footer />

@@ -3,6 +3,7 @@ import ProtectedRoute from './components/ProtectedRoute'
 import Login from './components/Login'
 import Home from './components/Home'
 import RestaurantDetails from './components/RestaurantDetails'
+import Cart from './components/Cart'
 import NotFound from './components/NotFound'
 import './App.css'
 
@@ -15,6 +16,7 @@ const App = () => (
       path="/restaurant/:id"
       component={RestaurantDetails}
     />
+    <ProtectedRoute exact path="/cart" component={Cart} />
     <Route path="/not-found" component={NotFound} />
     <Redirect to="not-found" />
   </Switch>

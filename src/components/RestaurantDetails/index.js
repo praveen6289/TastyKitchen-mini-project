@@ -86,6 +86,10 @@ class RestaurantDetails extends Component {
         apiStatus: restaurantsApiStatusConstants.success,
         restaurantData: fetchedRestaurantData,
       })
+    } else {
+      this.setState({
+        apiStatus: restaurantsApiStatusConstants.failure,
+      })
     }
   }
 
@@ -97,6 +101,25 @@ class RestaurantDetails extends Component {
     </div>
   )
 
+  displayRestaurantFailureView = () => (
+    <div className="not-found-container">
+      <img
+        src="https://res.cloudinary.com/dazr9r8xm/image/upload/v1662131952/TastyKitchen/not-found_kpxxzu.png"
+        alt="not found"
+        className="not-found-img"
+      />
+      <div className="not-found-details-container">
+        <h1 className="not-found-heading">Page Not Found</h1>
+        <p className="not-found-description">
+          We are sorry, the page you requested could not be found. Please go
+          back to the homepage
+        </p>
+        <button type="button" className="home-button">
+          Home
+        </button>
+      </div>
+    </div>
+  )
   // restaurants view
 
   displayRestaurantView = () => {
@@ -119,30 +142,33 @@ class RestaurantDetails extends Component {
     // console.log(foodItems)
     return (
       <div className="main-container">
-        <div className="restaurant-container" key={restaurantId}>
-          <div className="restaurant-details-container">
-            <img src={imageUrl} alt="restaurant" className="restaurant-img" />
-            <div className="details-container">
-              <h1 className="restaurant-name">{name}</h1>
-              <p className="restaurant-cuisine">{cuisine}</p>
-              <p className="restaurant-location">{location}</p>
-              <div className="restaurant-rating-cost-container">
-                <div className="restaurant-ratings-container">
-                  <div className="restaurant-ratings">
-                    <AiFillStar className="restaurant-rating-Star" />
-                    <p className="restaurant-rating-count">{rating}</p>
+        <div className="restaurant-id-container" key={restaurantId}>
+          <div className="restaurant-id-details-container">
+            <img
+              src={imageUrl}
+              alt="restaurant"
+              className="restaurant-id-img"
+            />
+            <div className="id-details-container">
+              <h1 className="restaurant-id-name">{name}</h1>
+              <p className="restaurant-id-cuisine">{cuisine}</p>
+              <p className="restaurant-id-location">{location}</p>
+              <div className="restaurant-id-rating-cost-container">
+                <div className="restaurant-id-ratings-container">
+                  <div className="restaurant-id-ratings">
+                    <AiFillStar className="restaurant-id-rating-Star" />
+                    <p className="restaurant-id-rating-count">{rating}</p>
                   </div>
-                  <p className="restaurant-reviews">{reviewsCount}+ Ratings</p>
+                  <p className="restaurant-id-reviews">
+                    {reviewsCount}+ Ratings
+                  </p>
                 </div>
-                <div className="restaurantClass.VerticalLine">
-                  <p style={{display: 'none'}}>.</p>
-                </div>
-                <div className="restaurantClass.CostContainer">
-                  <div className="restaurantClass.Cost">
-                    <BiRupee className="restaurantClass.Rupee" />
-                    <p className="restaurantClass.CostForTwo">{costForTwo}</p>
+                <div className="restaurant-cost-container">
+                  <div className="restaurant-cost">
+                    <BiRupee className="restaurant-rupee-icon" />
+                    <p className="restaurant-cost-for-two">{costForTwo}</p>
                   </div>
-                  <p className="restaurantClass.CostPara">Cost for two</p>
+                  <p className="restaurant-cost-description">Cost for two</p>
                 </div>
               </div>
             </div>
@@ -150,7 +176,7 @@ class RestaurantDetails extends Component {
         </div>
         <ul className="foods-list-container">
           {foodItems.map(eachItem => (
-            <FoodDetails key={eachItem.id} foodItem={eachItem} />
+            <FoodDetails key={eachItem.id} eachFoodItem={eachItem} />
           ))}
         </ul>
       </div>
@@ -164,10 +190,10 @@ class RestaurantDetails extends Component {
     switch (apiStatus) {
       case restaurantsApiStatusConstants.success:
         return this.displayRestaurantView()
+      case restaurantsApiStatusConstants.failure:
+        return this.displayRestaurantFailureView()
       case restaurantsApiStatusConstants.inProgress:
         return this.displayLoadingView()
-      case restaurantsApiStatusConstants.failure:
-        return null
       default:
         return null
     }

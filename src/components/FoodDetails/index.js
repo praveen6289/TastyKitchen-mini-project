@@ -1,142 +1,149 @@
 import {Component} from 'react'
 import {BiRupee} from 'react-icons/bi'
 import {FaStar} from 'react-icons/fa'
-import {HiOutlineMinusSm} from 'react-icons/hi'
-import {BsPlus} from 'react-icons/bs'
 import './index.css'
 
 class FoodItem extends Component {
-  state = {
-    isFound: false,
-    quantity: 0,
-  }
+  state = {}
 
-  // get the local storage data
   componentDidMount() {
-    this.findTheCartItemInList()
-  }
-
-  /* getTheLocalStorageData = () => {
-    const cartList = JSON.parse(localStorage.getItem('cart_list')) || []
-    // console.log(cartList)
-    this.setState({cartList})
-  } */
-
-  /* Add to cart when click on add button. this will
-  store in local storage */
-
-  findTheCartItemInList = () => {
-    const cartData = JSON.parse(localStorage.getItem('cartData')) || []
-    const {foodItem} = this.props
-    const cartItem = cartData.filter(each => each.id === foodItem.id)
-    // console.log(cartItem)
-    if (cartItem.length !== 0) {
-      // console.log(cartItem)
-      if (cartItem[0].quantity > 0) {
-        this.setState({quantity: cartItem[0].quantity, isFound: true})
-      } else if (cartItem[0].quantity < 1) {
-        this.removeCartItem()
-        this.setState({quantity: cartItem[0].quantity, isFound: false})
+    const {eachFoodItem} = this.props
+    const {id} = eachFoodItem
+    const cartData = localStorage.getItem('cartData')
+    const parsedCartData = JSON.parse(cartData)
+    if (parsedCartData === null) {
+      this.setState({
+        isButtonClicked: false,
+        itemQuantity: 0,
+      })
+    } else {
+      const presentCartData = parsedCartData.filter(
+        eachItem => eachItem.id === id,
+      )
+      if (presentCartData.length > 0) {
+        this.setState({
+          isButtonClicked: true,
+          itemQuantity: presentCartData[0].quantity,
+        })
       }
     }
   }
 
-  incrementCartItemQuantity = () => {
-    const cartData = JSON.parse(localStorage.getItem('cartData'))
-    const {foodItem} = this.props
-    const updatedCartData = cartData.map(eachItem => {
-      if (eachItem.id === foodItem.id) {
-        // console.log('found')
-        const updatedQuantity = eachItem.quantity + 1
-        return {...eachItem, quantity: updatedQuantity}
+  updateLocalStorage = () => {
+    const {isButtonClicked, itemQuantity} = this.state
+    const {eachFoodItem} = this.props
+    const {imageUrl, name, cost, id} = eachFoodItem
+
+    const localCartData = localStorage.getItem('cartData')
+    const parsedCartData = JSON.parse(localCartData)
+
+    if (parsedCartData === null) {
+      const updatedParsedCartData = []
+
+      if (isButtonClicked === true && itemQuantity > 0) {
+        const cartItem = {id, name, cost, imageUrl, quantity: itemQuantity}
+        updatedParsedCartData.push(cartItem)
+        localStorage.setItem('cartData', JSON.stringify(updatedParsedCartData))
       }
-      return eachItem
-    })
-    localStorage.setItem('cartData', JSON.stringify(updatedCartData))
-    this.findTheCartItemInList()
+    } else {
+      const updatedCartData = parsedCartData
+      if (isButtonClicked === true) {
+        const cartItem = {id, name, cost, imageUrl, quantity: itemQuantity}
+        const updatedCart = updatedCartData.filter(
+          eachItem => eachItem.id !== id,
+        )
+        updatedCart.push(cartItem)
+        localStorage.setItem('cartData', JSON.stringify(updatedCart))
+      } else {
+        const updatedCart = updatedCartData.filter(
+          eachItem => eachItem.id !== id,
+        )
+        localStorage.setItem('cartData', JSON.stringify(updatedCart))
+      }
+    }
+  }
+
+  onClickedAddCart = () => {
+    this.setState(
+      {
+        isButtonClicked: true,
+        itemQuantity: 1,
+      },
+      this.updateLocalStorage,
+    )
   }
 
   decrementCartItemQuantity = () => {
-    const cartData = JSON.parse(localStorage.getItem('cartData'))
-    const {foodItem} = this.props
-    const updatedCartData = cartData.map(eachItem => {
-      if (eachItem.id === foodItem.id) {
-        // console.log('found')
-        if (eachItem.quantity > 0) {
-          const updatedQuantity = eachItem.quantity - 1
-          return {...eachItem, quantity: updatedQuantity}
-        }
-      }
-      return eachItem
-    })
-    localStorage.setItem('cartData', JSON.stringify(updatedCartData))
-    this.findTheCartItemInList()
+    const {itemQuantity} = this.state
+    if (itemQuantity < 2) {
+      this.setState(
+        {
+          itemQuantity: 0,
+          isButtonClicked: false,
+        },
+        this.updateLocalStorage,
+      )
+    } else {
+      this.setState(
+        prev => ({
+          itemQuantity: prev.itemQuantity - 1,
+          isButtonClicked: true,
+        }),
+        this.updateLocalStorage,
+      )
+    }
   }
 
-  removeCartItem = () => {
-    const cartData = JSON.parse(localStorage.getItem('cartData'))
-    const {foodItem} = this.props
-    const updatedCartData = cartData.filter(
-      eachCartItem => eachCartItem.id !== foodItem.id,
-    )
-    localStorage.setItem('cartData', JSON.stringify(updatedCartData))
-    this.findTheCartItemInList()
-  }
-
-  addCartItem = () => {
-    const cartData = JSON.parse(localStorage.getItem('cartData')) || []
-    const {foodItem} = this.props
-    // console.log(foodItem)
-    const cartItem = {...foodItem, quantity: 1}
-    // console.log(cartItem)
-    cartData.push(cartItem)
-    localStorage.setItem('cartData', JSON.stringify(cartData))
-    this.findTheCartItemInList()
-    this.setState({isFound: true})
+  incrementCartItemQuantity = () => {
+    const {itemQuantity} = this.state
+    const updatedItemQuantity = itemQuantity + 1
+    this.setState({itemQuantity: updatedItemQuantity}, this.updateLocalStorage)
   }
 
   render() {
-    const {foodItem} = this.props
-    const {isFound, quantity} = this.state
-    console.log(quantity)
+    const {eachFoodItem} = this.props
+    const {isButtonClicked, itemQuantity} = this.state
+
     return (
       <li className="food-details-container" testid="foodItem">
-        <img src={foodItem.imageUrl} alt="food-item" className="food-img" />
+        <img src={eachFoodItem.imageUrl} alt="food-item" className="food-img" />
         <div className="food-details">
-          <h1 className="food-name">{foodItem.name}</h1>
+          <h1 className="food-name">{eachFoodItem.name}</h1>
           <div className="food-cost-container">
             <BiRupee className="food-cost-icon" />
-            <p className="food-cost">{foodItem.cost}.00</p>
+            <p className="food-cost">{eachFoodItem.cost}.00</p>
           </div>
           <div className="food-rating-container">
             <FaStar size="12px" color="#FFCC00" />
-            <p className="food-rating-count">{foodItem.rating}</p>
+            <p className="food-rating-count">{eachFoodItem.rating}</p>
           </div>
-          {isFound ? (
-            <div className="each-item-add-counter-container" id={foodItem.id}>
+          {isButtonClicked && itemQuantity > 0 ? (
+            <div className="each-item-add-counter-container">
               <button
                 type="button"
                 className="minus-icon-container"
                 testid="decrement-count"
                 onClick={this.decrementCartItemQuantity}
               >
-                <HiOutlineMinusSm className="minus-icon" />
+                -
               </button>
-              <p>{quantity}</p>
+              <p className="food-item-quantity" testid="active-count">
+                {itemQuantity}
+              </p>
               <button
                 type="button"
                 className="plus-icon-container"
                 testid="increment-count"
                 onClick={this.incrementCartItemQuantity}
               >
-                <BsPlus className="plus-icon" />
+                +
               </button>
             </div>
           ) : (
             <button
               type="button"
               className="food-add-button"
-              onClick={this.addCartItem}
+              onClick={this.onClickedAddCart}
             >
               ADD
             </button>
