@@ -60,6 +60,17 @@
     height: 350px;
   }
 }
+.slick-dots li button::before {
+  font-size: 12px;
+  color: #000000;
+  opacity: 0.7;
+}
+
+.slick-dots li.slick-active button::before {
+  color: #f7931e;
+  opacity: 1;
+  font-size: 20px;
+}
 
 .restaurants-loader {
   display: flex;
@@ -142,6 +153,7 @@
   .filter-container {
     align-items: flex-end;
     height: 24px;
+    width: 220px;
   }
 }
 
@@ -163,6 +175,7 @@
 @media screen and (min-width: 768px) {
   .sort-heading {
     align-self: center;
+    width: 60px;
   }
 }
 
@@ -323,10 +336,12 @@
   margin-bottom: 20px;
   border-radius: 5px;
   padding: 5px;
+  width: 250px;
 }
 @media screen and (min-width: 768px) {
   .search-input-container {
     margin-bottom: 0px;
+    margin-right: 20px;
   }
 }
 
@@ -337,7 +352,7 @@
   font-style: normal;
   font-weight: 700;
   font-size: 15px;
-  width: 300px;
+  width: 200px;
   color: #183b56;
   outline: none;
 }

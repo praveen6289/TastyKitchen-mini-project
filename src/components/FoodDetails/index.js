@@ -1,5 +1,4 @@
 import {Component} from 'react'
-import {BiRupee} from 'react-icons/bi'
 import {FaStar} from 'react-icons/fa'
 import './index.css'
 
@@ -110,8 +109,10 @@ class FoodItem extends Component {
         <div className="food-details">
           <h1 className="food-name">{eachFoodItem.name}</h1>
           <div className="food-cost-container">
-            <BiRupee className="food-cost-icon" />
-            <p className="food-cost">{eachFoodItem.cost}.00</p>
+            <p className="food-cost">
+              <span>₹ </span>
+              {eachFoodItem.cost}.00
+            </p>
           </div>
           <div className="food-rating-container">
             <FaStar size="12px" color="#FFCC00" />

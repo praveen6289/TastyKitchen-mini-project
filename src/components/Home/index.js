@@ -1,5 +1,6 @@
 import {Component} from 'react'
 import Cookies from 'js-cookie'
+import {Link} from 'react-router-dom'
 import {IoIosArrowBack, IoIosArrowForward} from 'react-icons/io'
 import {AiOutlineSearch} from 'react-icons/ai'
 import {BsFilterLeft} from 'react-icons/bs'
@@ -84,7 +85,7 @@ class Home extends Component {
 
   carouselDisplayLoading = () => (
     <div className="loader-container" testid="restaurants-offers-loader">
-      <Loader type="ThreeDots" color="#0b69ff" height="30" width="30" />
+      <Loader type="Oval" color="##F7931E" height="30" width="30" />
     </div>
   )
 
@@ -92,14 +93,10 @@ class Home extends Component {
     const {carouselData} = this.state
     const settings = {
       dots: true,
-      slidesToShow: 1,
-      slidesToScroll: 1,
-      speed: 700,
-      infinite: true,
-      dotsClass: 'slick-dots',
       autoplay: true,
-      autoplaySpeed: 3000,
-      adaptiveHeight: true,
+      autoplaySpeed: 2000,
+      arrows: false,
+      infinite: true,
     }
     return (
       <div className="slider-container">
@@ -219,8 +216,8 @@ class Home extends Component {
   }
 
   renderLoadingRestaurantsView = () => (
-    <div className="restaurants-loader" testid="restaurants-offers-loader">
-      <Loader type="ThreeDots" color="#0b69ff" height="30" width="30" />
+    <div className="restaurants-loader" testid="restaurants-list-loader">
+      <Loader type="Oval" color="##F7931E" height="30" width="30" />
     </div>
   )
 
@@ -237,9 +234,11 @@ class Home extends Component {
           We are sorry, the page you requested could not be found. Please go
           back to the homepage
         </p>
-        <button type="button" className="home-button">
-          Home
-        </button>
+        <Link to="/">
+          <button type="button" className="home-button">
+            Home Page
+          </button>
+        </Link>
       </div>
     </div>
   )

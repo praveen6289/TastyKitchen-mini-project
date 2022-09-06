@@ -3,6 +3,7 @@
   align-items: center;
   width: 100%;
   margin-top: 0;
+  padding: 0px;
 }
 @media screen and (min-width: 768px) {
   .mobile-list-cart-item {
@@ -52,20 +53,22 @@
 }
 
 .desktop-list-cart-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 24px;
+  display: none;
 }
-@media screen and (max-width: 768px) {
+@media screen and (min-width: 768px) {
   .desktop-list-cart-item {
-    display: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+
+    width: 100%;
   }
 }
 .desktop-item-container {
   display: flex;
   align-items: center;
-  width: 30%;
+  width: 300px;
 }
 .desktop-cart-item-image {
   width: 136px;
@@ -78,7 +81,7 @@
   font-family: DM Sans;
   font-style: normal;
   font-weight: 500;
-  font-size: 20px;
+  font-size: 16px;
   line-height: 24px;
   letter-spacing: 0.2px;
   color: #183b56;
@@ -87,7 +90,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 30%;
+  width: 200px;
 }
 .desktop-cart-item-quantity {
   font-family: DM Sans;
@@ -106,7 +109,7 @@
   font-size: 16px;
   line-height: 24px;
   color: #ffa412;
-  width: 30%;
+  width: 200px;
   text-align: center;
 }
 .decrement-button {

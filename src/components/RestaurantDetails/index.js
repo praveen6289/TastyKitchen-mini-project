@@ -1,6 +1,7 @@
 import {Component} from 'react'
 import Cookies from 'js-cookie'
-import {BiRupee} from 'react-icons/bi'
+import {Link} from 'react-router-dom'
+
 import {AiFillStar} from 'react-icons/ai'
 import Loader from 'react-loader-spinner'
 import NavBar from '../NavBar'
@@ -97,7 +98,7 @@ class RestaurantDetails extends Component {
 
   displayLoadingView = () => (
     <div className="restaurant-Loader" testid="restaurant-details-loader">
-      <Loader type="ThreeDots" color="#0b69ff" height="50" width="50" />
+      <Loader type="Oval" color="##F7931E" height="50" width="50" />
     </div>
   )
 
@@ -114,9 +115,11 @@ class RestaurantDetails extends Component {
           We are sorry, the page you requested could not be found. Please go
           back to the homepage
         </p>
-        <button type="button" className="home-button">
-          Home
-        </button>
+        <Link to="/">
+          <button type="button" className="home-button">
+            Home Page
+          </button>
+        </Link>
       </div>
     </div>
   )
@@ -165,8 +168,10 @@ class RestaurantDetails extends Component {
                 </div>
                 <div className="restaurant-cost-container">
                   <div className="restaurant-cost">
-                    <BiRupee className="restaurant-rupee-icon" />
-                    <p className="restaurant-cost-for-two">{costForTwo}</p>
+                    <p className="restaurant-cost-for-two">
+                      <span>₹ </span>
+                      {costForTwo}
+                    </p>
                   </div>
                   <p className="restaurant-cost-description">Cost for two</p>
                 </div>

@@ -1,7 +1,5 @@
 import {Component} from 'react'
 import {Link} from 'react-router-dom'
-
-import {BiRupee} from 'react-icons/bi'
 import NavBar from '../NavBar'
 import CartItem from '../CartItem'
 import Footer from '../Footer'
@@ -74,9 +72,9 @@ class CartRoute extends Component {
           <img
             src="https://res.cloudinary.com/dazr9r8xm/image/upload/v1662377103/TastyKitchen/No-orders-img_sucrek.png"
             className="cart-empty-img"
-            alt="cart empty"
+            alt="empty cart"
           />
-          <h1 className="cart-empty-heading">No Orders Yet</h1>
+          <h1 className="cart-empty-heading">No Order Yet!</h1>
           <p className="cart-empty-description">
             Your cart is empty. Add something from the menu.
           </p>
@@ -102,9 +100,8 @@ class CartRoute extends Component {
             alt="check-circle"
           />
           <h1 className="order-successful-heading">Payment Successful</h1>
-          <p className="order-successful-para">Thank you for ordering</p>
           <p className="order-successful-para">
-            Your payment is successfully completed.
+            Thank you for ordering Your payment is successfully completed.
           </p>
           <Link to="/">
             <button type="button" className="order-successful-button">
@@ -126,7 +123,7 @@ class CartRoute extends Component {
         <div className="cart-list-container">
           <div className="cart-list-items-container">
             <div className="desktop-view-header-container">
-              <h1 className="heading">Item</h1>
+              <h1 className="item-heading">Item</h1>
               <h1 className="heading">Quantity</h1>
               <h1 className="heading">Price</h1>
             </div>
@@ -145,8 +142,8 @@ class CartRoute extends Component {
               <h1 className="order-heading">Order Total:</h1>
               <div>
                 <div className="total-amount-container">
-                  <BiRupee className="rupee-icon" />
                   <p testid="total-price" className="total-amount">
+                    <span>₹ </span>
                     {totalCartAmount}.00
                   </p>
                 </div>
