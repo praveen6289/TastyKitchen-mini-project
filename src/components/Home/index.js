@@ -168,7 +168,7 @@ class Home extends Component {
           totalReviews: eachItem.user_rating.total_reviews,
         },
       }))
-      console.log(fetchedAllRestaurantsData)
+
       this.setState({
         restaurantsApiStatus: allPopularRestaurantsApiStatus.success,
         allRestaurantsData: fetchedAllRestaurantsData,
@@ -317,7 +317,7 @@ class Home extends Component {
 
   render() {
     const {activePage} = this.state
-    console.log(activePage)
+
     return (
       <div className="app-container">
         <NavBar />

@@ -62,7 +62,10 @@ class CartRoute extends Component {
   onDeleteCartItem = id => {
     const {cartData} = this.state
     const updatedCartData = cartData.filter(eachItem => eachItem.id !== id)
-    this.setState({cartData: updatedCartData}, this.updateCartData)
+    this.setState(
+      {cartData: updatedCartData, cartStatus: cartStatusConstants.noCartItems},
+      this.updateCartData,
+    )
   }
 
   cartEmptyView = () => (

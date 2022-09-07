@@ -2,7 +2,7 @@ import {Component} from 'react'
 import {FaStar} from 'react-icons/fa'
 import './index.css'
 
-class FoodItem extends Component {
+class FoodDetails extends Component {
   state = {}
 
   componentDidMount() {
@@ -32,7 +32,6 @@ class FoodItem extends Component {
     const {isButtonClicked, itemQuantity} = this.state
     const {eachFoodItem} = this.props
     const {imageUrl, name, cost, id} = eachFoodItem
-
     const localCartData = localStorage.getItem('cartData')
     const parsedCartData = JSON.parse(localCartData)
 
@@ -51,6 +50,7 @@ class FoodItem extends Component {
         const updatedCart = updatedCartData.filter(
           eachItem => eachItem.id !== id,
         )
+
         updatedCart.push(cartItem)
         localStorage.setItem('cartData', JSON.stringify(updatedCart))
       } else {
@@ -155,4 +155,4 @@ class FoodItem extends Component {
   }
 }
 
-export default FoodItem
+export default FoodDetails
