@@ -30,7 +30,7 @@ class CartRoute extends Component {
           cartAmounts.push(totalItemAmount)
         })
         const totalCartAmount = cartAmounts.reduce(
-          (previousScore, currentScore) => previousScore + currentScore,
+          (previousAmount, currentAmount) => previousAmount + currentAmount,
         )
         this.setState({totalCartAmount})
       }
@@ -68,6 +68,8 @@ class CartRoute extends Component {
     )
   }
 
+  // Display empty cart view when no items in cart
+
   cartEmptyView = () => (
     <>
       <div className="cart-empty-view-container">
@@ -92,7 +94,7 @@ class CartRoute extends Component {
     </>
   )
 
-  // payment successful view
+  // Display payment successful view when user click on place order button
 
   paymentSuccessfulView = () => (
     <>

@@ -59,6 +59,7 @@ class Home extends Component {
     this.onGetRestaurantsDetails()
   }
 
+  // Get Carousel Images from  resource url
   onGetCarouselDetails = async () => {
     this.setState({carouselApiStatus: carouselApiStatusConstants.inProgress})
     const jwtToken = Cookies.get('jwt_token')
@@ -83,12 +84,14 @@ class Home extends Component {
     }
   }
 
+  // Get carousel display loading view when status is inProgress
   carouselDisplayLoading = () => (
     <div className="loader-container" testid="restaurants-offers-loader">
       <Loader type="Oval" color="##F7931E" height="30" width="30" />
     </div>
   )
 
+  // display carousel images when api status is success
   displayCarouselImages = () => {
     const {carouselData} = this.state
     const settings = {
@@ -114,6 +117,7 @@ class Home extends Component {
     )
   }
 
+  // Rendering carousel images based on the apiStatus
   renderCarouselData = () => {
     const {carouselApiStatus} = this.state
 
@@ -127,6 +131,7 @@ class Home extends Component {
     }
   }
 
+  // Get Popular restaurants Details using resource Url
   onGetRestaurantsDetails = async () => {
     this.setState({
       restaurantsApiStatus: allPopularRestaurantsApiStatus.inProgress,
@@ -180,6 +185,7 @@ class Home extends Component {
     }
   }
 
+  // filter the Data based on sort by option
   onChangeSortBy = event => {
     this.setState(
       {selectedSortByValue: event.target.value},
@@ -211,16 +217,19 @@ class Home extends Component {
     this.setState({searchInput: event.target.value})
   }
 
+  // fetch  popular restaurants based on input search
   onSubmitSearchInput = () => {
     this.onGetRestaurantsDetails()
   }
 
+  // Display restaurant loading view while Data is fetching from resource url
   renderLoadingRestaurantsView = () => (
     <div className="restaurants-loader" testid="restaurants-list-loader">
       <Loader type="Oval" color="##F7931E" height="30" width="30" />
     </div>
   )
 
+  // Display Failed view when Data fetching is failed from resource url
   renderRestaurantsFailureView = () => (
     <div className="not-found-container">
       <img
@@ -243,6 +252,7 @@ class Home extends Component {
     </div>
   )
 
+  // Display restaurant details including images when API Status is Success
   renderDisplayRestaurantsView = () => {
     const {allRestaurantsData, selectedSortByValue, searchInput} = this.state
     return (
@@ -300,6 +310,7 @@ class Home extends Component {
     )
   }
 
+  // Display restaurant details based on the API Status
   renderAllPopularRestaurants = () => {
     const {restaurantsApiStatus} = this.state
 

@@ -5,6 +5,7 @@ import './index.css'
 class FoodDetails extends Component {
   state = {}
 
+  // get localStorage Data
   componentDidMount() {
     const {eachFoodItem} = this.props
     const {id} = eachFoodItem
@@ -28,6 +29,7 @@ class FoodDetails extends Component {
     }
   }
 
+  // Updated the localStorage based the user adding food items and increase or decrease  quantity in "cartData"
   updateLocalStorage = () => {
     const {isButtonClicked, itemQuantity} = this.state
     const {eachFoodItem} = this.props
@@ -50,7 +52,6 @@ class FoodDetails extends Component {
         const updatedCart = updatedCartData.filter(
           eachItem => eachItem.id !== id,
         )
-
         updatedCart.push(cartItem)
         localStorage.setItem('cartData', JSON.stringify(updatedCart))
       } else {
@@ -62,6 +63,7 @@ class FoodDetails extends Component {
     }
   }
 
+  // when user clicks on add food item button, State details updated and item details added in localStorage CartData
   onClickedAddCart = () => {
     this.setState(
       {
@@ -72,6 +74,7 @@ class FoodDetails extends Component {
     )
   }
 
+  // When user  Decrease the food items quantity then in localStorage  CartData items quantity is decreased
   decrementCartItemQuantity = () => {
     const {itemQuantity} = this.state
     if (itemQuantity < 2) {
@@ -93,6 +96,7 @@ class FoodDetails extends Component {
     }
   }
 
+  // When user  increase the food items quantity then in localStorage  CartData items quantity is increased
   incrementCartItemQuantity = () => {
     const {itemQuantity} = this.state
     const updatedItemQuantity = itemQuantity + 1
