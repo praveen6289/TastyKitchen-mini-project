@@ -254,59 +254,16 @@ class Home extends Component {
 
   // Display restaurant details including images when API Status is Success
   renderDisplayRestaurantsView = () => {
-    const {allRestaurantsData, selectedSortByValue, searchInput} = this.state
+    const {allRestaurantsData} = this.state
     return (
-      <div className="home-details-container">
-        <div className="home-filter-container">
-          <div className="home-description-container">
-            <h1 className="home-heading">Popular Restaurants</h1>
-            <p className="home-description">
-              Select Your favourite restaurant special dish and make your day
-              happy...
-            </p>
-          </div>
-          <div className="search-input-container">
-            <input
-              type="search"
-              id="searchInput"
-              className="search-element"
-              onChange={this.onSearchRestaurant}
-              placeholder="Search Restaurant Here.."
-              value={searchInput}
-            />
-            <button
-              testid="searchButton"
-              type="button"
-              className="search-button"
-              onClick={this.onSubmitSearchInput}
-            >
-              <AiOutlineSearch className="search-icon" />
-            </button>
-          </div>
-          <div className="filter-container">
-            <BsFilterLeft className="filter-logo" />
-            <p className="sort-heading">Sort by</p>
-            <select
-              id="sortBy"
-              className="select-element"
-              value={selectedSortByValue}
-              onChange={this.onChangeSortBy}
-            >
-              {sortByOptions.map(eachOption => (
-                <option key={eachOption.id}>{eachOption.displayText}</option>
-              ))}
-            </select>
-          </div>
-        </div>
-        <ul className="restaurants-list-container">
-          {allRestaurantsData.map(eachRestaurant => (
-            <PopularRestaurantView
-              restaurantDetails={eachRestaurant}
-              key={eachRestaurant.id}
-            />
-          ))}
-        </ul>
-      </div>
+      <ul className="restaurants-list-container">
+        {allRestaurantsData.map(eachRestaurant => (
+          <PopularRestaurantView
+            restaurantDetails={eachRestaurant}
+            key={eachRestaurant.id}
+          />
+        ))}
+      </ul>
     )
   }
 
@@ -327,14 +284,60 @@ class Home extends Component {
   }
 
   render() {
-    const {activePage} = this.state
+    const {activePage, selectedSortByValue, searchInput} = this.state
 
     return (
       <div className="app-container">
         <NavBar />
         <div className="home-container">
           {this.renderCarouselData()}
-          {this.renderAllPopularRestaurants()}
+          <div className="home-details-container">
+            <div className="home-filter-container">
+              <div className="home-description-container">
+                <h1 className="home-heading">Popular Restaurants</h1>
+                <p className="home-description">
+                  Select Your favourite restaurant special dish and make your
+                  day happy...
+                </p>
+              </div>
+              <div className="search-input-container">
+                <input
+                  type="search"
+                  id="searchInput"
+                  className="search-element"
+                  onChange={this.onSearchRestaurant}
+                  placeholder="Search Restaurant Here.."
+                  value={searchInput}
+                />
+                <button
+                  testid="searchButton"
+                  type="button"
+                  className="search-button"
+                  onClick={this.onSubmitSearchInput}
+                >
+                  <AiOutlineSearch className="search-icon" />
+                </button>
+              </div>
+              <div className="filter-container">
+                <BsFilterLeft className="filter-logo" />
+                <p className="sort-heading">Sort by</p>
+                <select
+                  id="sortBy"
+                  className="select-element"
+                  value={selectedSortByValue}
+                  onChange={this.onChangeSortBy}
+                >
+                  {sortByOptions.map(eachOption => (
+                    <option key={eachOption.id}>
+                      {eachOption.displayText}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+            {this.renderAllPopularRestaurants()}
+          </div>
+
           <div className="pagination-counter-container">
             <button
               type="button"
