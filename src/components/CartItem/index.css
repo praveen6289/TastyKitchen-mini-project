@@ -1,33 +1,49 @@
-.mobile-list-cart-item {
+.cart-item-container {
   display: flex;
   align-items: center;
   width: 100%;
-  margin-top: 0;
   padding: 0px;
 }
 @media screen and (min-width: 768px) {
-  .mobile-list-cart-item {
-    display: none;
+  .cart-item-container {
+    margin-bottom: 20px;
   }
 }
-.mobile-cart-item-image {
+
+.cart-item-image {
   width: 136px;
   height: 90px;
-  margin-right: 16px;
+  margin-right: 8px;
   border-radius: 8px;
   flex-shrink: 0;
 }
-.cart-Item-name {
+.cart-item-details-container {
+  display: flex;
+  flex-direction: column;
+}
+@media screen and (min-width: 768px) {
+  .cart-item-details-container {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 70%;
+  }
+}
+@media screen and (min-width: 992px) {
+  .cart-item-details-container {
+    width: 80%;
+  }
+}
+.cart-item-name {
   font-family: DM Sans;
   font-style: normal;
   font-weight: 500;
   font-size: 14px;
   line-height: 24px;
   letter-spacing: 0.2px;
-
   color: #183b56;
 }
-.cartItem-quantity-container {
+.cart-item-quantity-container {
   display: flex;
   align-items: center;
 }
@@ -50,66 +66,6 @@
   color: #ffa412;
 }
 
-.desktop-list-cart-item {
-  display: none;
-}
-@media screen and (min-width: 768px) {
-  .desktop-list-cart-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 24px;
-
-    width: 100%;
-  }
-}
-.desktop-item-container {
-  display: flex;
-  align-items: center;
-  width: 300px;
-}
-.desktop-cart-item-image {
-  width: 136px;
-  height: 100px;
-  margin-right: 16px;
-  border-radius: 8px;
-  flex-shrink: 0;
-}
-.desktop-cart-item-name {
-  font-family: DM Sans;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 24px;
-  letter-spacing: 0.2px;
-  color: #183b56;
-}
-.desktop-cartItem-quantity-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 200px;
-}
-.desktop-cart-item-quantity {
-  font-family: DM Sans;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 24px;
-  color: #475569;
-  margin-left: 10px;
-  margin-right: 10px;
-}
-.desktop-cart-item-cost {
-  font-family: DM Sans;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 16px;
-  line-height: 24px;
-  color: #ffa412;
-  width: 200px;
-  text-align: center;
-}
 .decrement-button {
   background-color: transparent;
   padding: 0px;

@@ -25,7 +25,6 @@ class RestaurantDetails extends Component {
   // component did mount method
   componentDidMount() {
     this.getRestaurantData()
-    window.scrollTo(0, 0)
   }
 
   // convert snake case to camel case
@@ -168,10 +167,7 @@ class RestaurantDetails extends Component {
                 </div>
                 <div className="restaurant-cost-container">
                   <div className="restaurant-cost">
-                    <p className="restaurant-cost-for-two">
-                      <span>₹ </span>
-                      {costForTwo}
-                    </p>
+                    <p className="restaurant-cost-for-two">₹ {costForTwo}</p>
                   </div>
                   <p className="restaurant-cost-description">Cost for two</p>
                 </div>

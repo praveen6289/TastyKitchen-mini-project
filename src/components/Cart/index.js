@@ -16,6 +16,7 @@ const cartStatusConstants = {
 class CartRoute extends Component {
   state = {cartData: [], cartStatus: cartStatusConstants.initial}
 
+  //Fetching cartData from localStorage
   componentDidMount() {
     const cartData = localStorage.getItem('cartData')
     const parseCartData = JSON.parse(cartData)
@@ -148,8 +149,7 @@ class CartRoute extends Component {
               <div>
                 <div className="total-amount-container">
                   <p testid="total-price" className="total-amount">
-                    <span>₹ </span>
-                    {totalCartAmount}.00
+                    ₹ {totalCartAmount}.00
                   </p>
                 </div>
                 <button

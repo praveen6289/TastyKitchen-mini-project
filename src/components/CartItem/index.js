@@ -12,6 +12,8 @@ class CartItem extends Component {
     this.setState({totalItemCost, quantity})
   }
 
+  //updating cart items quantity by fetching  local storage cart data
+
   updateLocalStorage = () => {
     const {quantity} = this.state
     const {eachItem} = this.props
@@ -64,15 +66,11 @@ class CartItem extends Component {
     const {totalItemCost, quantity} = this.state
     return (
       <>
-        <li testid="cartItem" className="mobile-list-cart-item">
-          <img
-            className="mobile-cart-item-image"
-            src={imageUrl}
-            alt={imageUrl}
-          />
-          <div>
-            <h1 className="cart-Item-name">{name}</h1>
-            <div className="cartItem-quantity-container">
+        <li testid="cartItem" className="cart-item-container">
+          <img className="cart-item-image" src={imageUrl} alt={imageUrl} />
+          <div className="cart-item-details-container">
+            <h1 className="cart-item-name">{name}</h1>
+            <div className="cart-item-quantity-container">
               <button
                 testid="decrement-quantity"
                 type="button"
@@ -93,46 +91,8 @@ class CartItem extends Component {
                 <BsPlusSquare />
               </button>
             </div>
-            <p testid="total-price" className="cart-item-cost">
-              <span>₹ </span>
-              {totalItemCost}
-            </p>
+            <p className="cart-item-cost">₹ {totalItemCost}.00</p>
           </div>
-        </li>
-        <li testid="cartItem" className="desktop-list-cart-item">
-          <div className="desktop-item-container">
-            <img
-              className="desktop-cart-item-image"
-              src={imageUrl}
-              alt={imageUrl}
-            />
-            <h1 className="desktop-cart-item-name">{name}</h1>
-          </div>
-          <div className="desktop-cartItem-quantity-container">
-            <button
-              testid="decrement-quantity"
-              type="button"
-              className="decrement-button"
-              onClick={this.onDecrementClicked}
-            >
-              <BsDashSquare />
-            </button>
-            <span testid="item-quantity" className="desktop-cart-item-quantity">
-              {quantity}
-            </span>
-            <button
-              testid="increment-quantity"
-              type="button"
-              className="increment-button"
-              onClick={this.onIncrementClicked}
-            >
-              <BsPlusSquare />
-            </button>
-          </div>
-          <p testid="total-price" className="desktop-cart-item-cost">
-            <span>₹ </span>
-            {totalItemCost}
-          </p>
         </li>
       </>
     )

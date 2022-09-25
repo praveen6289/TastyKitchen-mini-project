@@ -113,10 +113,7 @@ class FoodDetails extends Component {
         <div className="food-details">
           <h1 className="food-name">{eachFoodItem.name}</h1>
           <div className="food-cost-container">
-            <p className="food-cost">
-              <span>₹ </span>
-              {eachFoodItem.cost}.00
-            </p>
+            <p className="food-cost">₹ {eachFoodItem.cost}.00</p>
           </div>
           <div className="food-rating-container">
             <FaStar size="12px" color="#FFCC00" />
