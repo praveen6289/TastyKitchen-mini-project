@@ -16,10 +16,12 @@ const cartStatusConstants = {
 class CartRoute extends Component {
   state = {cartData: [], cartStatus: cartStatusConstants.initial}
 
-  //Fetching cartData from localStorage
+  // Fetching cartData from localStorage
+
   componentDidMount() {
     const cartData = localStorage.getItem('cartData')
     const parseCartData = JSON.parse(cartData)
+
     if (parseCartData === null || parseCartData.length === 0) {
       this.setState({cartStatus: cartStatusConstants.noCartItems})
     } else {

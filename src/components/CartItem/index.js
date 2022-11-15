@@ -12,7 +12,7 @@ class CartItem extends Component {
     this.setState({totalItemCost, quantity})
   }
 
-  //updating cart items quantity by fetching  local storage cart data
+  // updating cart items quantity by fetching  local storage cart data
 
   updateLocalStorage = () => {
     const {quantity} = this.state
