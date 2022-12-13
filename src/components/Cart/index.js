@@ -59,16 +59,14 @@ class CartRoute extends Component {
       localStorage.setItem('cartData', JSON.stringify(cartData))
     } else {
       localStorage.removeItem('cartData')
+      this.setState({cartStatus: cartStatusConstants.noCartItems})
     }
   }
 
   onDeleteCartItem = id => {
     const {cartData} = this.state
     const updatedCartData = cartData.filter(eachItem => eachItem.id !== id)
-    this.setState(
-      {cartData: updatedCartData, cartStatus: cartStatusConstants.noCartItems},
-      this.updateCartData,
-    )
+    this.setState({cartData: updatedCartData}, this.updateCartData)
   }
 
   // Display empty cart view when no items in cart
@@ -135,6 +133,7 @@ class CartRoute extends Component {
               <h1 className="heading">Quantity</h1>
               <h1 className="heading">Price</h1>
             </div>
+
             <ul className="cart-item-list-container">
               {cartData.map(eachItem => (
                 <CartItem
@@ -174,6 +173,7 @@ class CartRoute extends Component {
 
   onRenderDisplayCartPage = () => {
     const {cartStatus} = this.state
+    console.log(cartStatus)
 
     switch (cartStatus) {
       case cartStatusConstants.cartItemsFound:
